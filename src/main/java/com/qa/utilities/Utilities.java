@@ -1,5 +1,4 @@
 package com.qa.utilities;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,9 +12,11 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.io.FileHandler;
 
 
@@ -23,7 +24,7 @@ import org.openqa.selenium.io.FileHandler;
 public class Utilities extends Base {
 	
 	public static final int IMPLICIT_WAIT_TIME=10;
-	public static final int PAGE_LOAD_TIME=5;
+	public static final int PAGE_LOAD_TIME=10;
 	public String destinationScreenshotPath;
 	public static String generateEmailWithTimeStamp() {
 		
@@ -106,7 +107,19 @@ public class Utilities extends Base {
 		return destinationScreenshotPath;
 	}
 
+	public static void highLightElement(WebElement element) {
 
+		 try {
+		  JavascriptExecutor js = (JavascriptExecutor) driver;
+		  js.executeScript("arguments[0].setAttribute('style','background: yellow; border: 2px solid red;');", element);
+		//  js.executeScript("arguments[0].setAttribute('style','border: 2px solid red;');", element);
+		  //		  Thread.sleep(1000);
+//		  js.executeScript("arguments[0].style.border=''", element, "");
+		  Thread.sleep(1000);
+		 } catch (InterruptedException e) {
+		  // TODO Auto-generated catch block
+		  e.printStackTrace();
+		 }
 
-	
+	}
 }

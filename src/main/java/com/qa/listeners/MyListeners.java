@@ -38,7 +38,7 @@ public class MyListeners implements ITestListener {
 		
 		extentTest = extentReport.createTest(result.getName());
 		extentTest.log(Status.INFO,result.getName()+" started executing");
-		extentTest.assignDevice("Mobile");
+		extentTest.assignDevice("Chrome");
 		 extentTest.assignAuthor("Ganesh");
 		 extentTest.assignCategory("Smoke");
 	}
@@ -68,32 +68,36 @@ public class MyListeners implements ITestListener {
 		extentTest.log(Status.FAIL,result.getName()+" got failed");
 
 		
-		JiraPolicy jiraPolicy = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(JiraPolicy.class);
-			boolean isTicketReady = jiraPolicy.logTicketReady();
-			if (isTicketReady) {
-				// raise jira ticket:
-				System.out.println("is ticket ready for JIRA: " + isTicketReady);
-			
-				JiraServiceProvider jiraSp = new JiraServiceProvider("https://jira.vahanacloud.com",
-					"ganesh.timande@decimal.co.in", "Deep@27#1987", "RTB");
-				String issueSummary = result.getMethod().getConstructorOrMethod().getMethod().getName()+" "+ "Failed";
-						
-				String issueDescription = result.getThrowable().getMessage() + "\n";
-				issueDescription.concat(ExceptionUtils.getFullStackTrace(result.getThrowable()));
-				
-				String Methodname =result.getMethod().getConstructorOrMethod().getMethod().getName();
-				
-			
-					try {
-						jiraSp.createJiraTicket("Feature", issueSummary, issueDescription,Methodname);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();  
-					}
+		
+		  JiraPolicy jiraPolicy =
+	  result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(
+	  JiraPolicy.class); boolean isTicketReady = jiraPolicy.logTicketReady(); if
+	  (isTicketReady) { // raise jira ticket:
+		  System.out.println("is ticket ready for JIRA: " + isTicketReady);
+		  
+		  JiraServiceProvider jiraSp = new
+		  JiraServiceProvider("https://jira.vahanacloud.com",
+		  "ganesh.timande@decimal.co.in", "Deep@27#1987", "RTB"); String issueSummary =
+		  result.getMethod().getConstructorOrMethod().getMethod().getName()+" "+
+		  "Failed";
+		  
+	  String issueDescription = result.getThrowable().getMessage() + "\n";
+		  issueDescription.concat(ExceptionUtils.getFullStackTrace(result.getThrowable(
+		  )));
+		  
+		  String Methodname
+		  =result.getMethod().getConstructorOrMethod().getMethod().getName();
+		  
+
+			try {
+			jiraSp.createJiraTicket("Feature", issueSummary, issueDescription,Methodname);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();  
 			}
-					
+	}
 			
-		}
+	}
 	
 
 	@Override

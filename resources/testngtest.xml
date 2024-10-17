@@ -7,7 +7,11 @@
   <test thread-count="5" name="Test">
     <classes>
       <class name="com.qa.testcases.LoginPageTest"/>
-     
+<!--        <class name="com.qa.testcases.DashboardpageTest"/> -->
+<!-- 	  <class name="com.qa.testcases.AddfunctionpageTest"/> -->
+<!-- 	 <class name="com.qa.testcases.DashboardfunctionrolepageTest"/> -->
+<!-- 		    <class name="com.qa.testcases.DashboardlocationpageTest"/> -->
+<!-- 			<class name="com.qa.testcases.AddmployeepageTest"/> -->
    
     </classes>
   </test> <!-- Test -->
